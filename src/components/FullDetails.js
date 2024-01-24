@@ -48,27 +48,28 @@ const FullDetails = ({result}) => {
   
   
   return (
-    <div className={`z-10 bg-black w-full h-full fixed top-0 left-0 rounded-lg bg-opacity-25 ${isOpen ? '' : 'hidden'}`}>
-      <div className='fixed top-4 right-4 left-4 bottom-4 md:top-20 md:right-20 md:left-20 md:bottom-20 lg:right-40 lg:left-40 bg-white rounded-lg overflow-y-scroll'>
+    <div className={`bg-black w-full h-full fixed top-0 left-0 rounded-lg bg-opacity-25 ${isOpen ? '' : 'hidden'}`}>
+      <div className='fixed top-4 right-4 left-4 bottom-4 md:top-10 md:right-10 md:left-10 md:bottom-10 lg:right-20 lg:left-20 lg:top-14 lg:bottom-14 xl:right-40 xl:left-40 bg-white rounded-lg overflow-y-scroll xl:overflow-y-auto'>
         {/* header */}
-        <div className='bg-neutral-200 rounded-t-lg p-3 lg:p-10 flex justify-between items-center'>
+        <div className='bg-neutral-200 rounded-t-lg p-3 sm:p-4 md:p-5 lg:p-6 2xl:p-8 flex justify-between items-center'>
           <h2 onClick={()=>console.log(result)} className='text-xl lg:text-2xl text-[#3B4043] font-semibold'>Preview ID:&nbsp;{result.id}</h2>
-          <span onClick={()=>setIsOpen(false)} className='text-xl rounded-md border-2 p-2 border-[#3B4043]'><RxCross2 /></span>
+          <span onClick={()=>setIsOpen(false)} className='text-base lg:text-lg xl:text-xl rounded-md border-2 p-2 border-[#3B4043]'><RxCross2 /></span>
         </div>
-        <div className='w-full p-3 lg:p-5 flex flex-col lg:flex-row gap-2 lg:justify-between bg-white rounded-b-lg'>
-          <div className='w-full lg:w-3/5'>
+        {/* Details */}
+        <div className='w-full p-3 lg:p-5 flex flex-col xl:flex-row gap-2 xl:justify-between bg-white rounded-b-lg'>
+          <div className='w-full xl:w-3/5'>
             <img className='w-full h-4/5 object-cover rounded-md' src={result.webformatURL} alt={result.tags} />
-            <div className='pt-2 flex gap-2 lg:gap-3 lg:pt-4 lg:text-lg items-center'>
+            <div className='pt-2 flex gap-2 xl:gap-3 lg:pt-4 xl:text-lg items-center'>
               <h4 className='text-base text-[#3B4043] font-semibold'>Tags:</h4>
               {result.tags.split(', ').map((tag, index) => (
                 <span key={index} className='bg-neutral-100 text-[#767676] rounded-md p-2 text-sm'>{tag}</span>
               ))}
             </div>
           </div>
-          <div className='w-full lg:w-1/3'>
-            <h2 className='text-[#3B4043] text-2xl font-semibold lg:text-3xl'>Download</h2>
+          <div className='w-full xl:w-1/3'>
+            <h2 className='text-[#3B4043] text-2xl font-semibold xl:text-3xl'>Download</h2>
             {/* table */}
-            <div className="overflow-x-auto rounded-lg my-3 lg:my-5">
+            <div className="overflow-x-auto rounded-lg my-3 xl:my-5">
                 <table className="w-full text-sm text-left text-[#3B4043] border-2 rounded-lg">
                     <tbody>
                         <tr className={`border-b rounded-t-lg ${selectedQuality === "small" ? 'bg-neutral-100' : ''}`} onClick={() => handleQualityChange("small")}>
@@ -96,32 +97,32 @@ const FullDetails = ({result}) => {
             </div>
             <div onClick={handleDownload} className='text-white bg-[#4BC34B] rounded-md text-center py-3 lg:py-4 font-bold'>Download for free!</div>
             {/* information */}
-            <div className='py-5 lg:py-7'>
+            <div className='py-5 xl:py-7'>
               <h3 className='text-[#3B4043] text-xl lg:text-2xl font-semibold'>Information</h3>
-              <div className='grid grid-cols-3 justify-between text-sm md:text-base lg:text-lg mt-4'>
+              <div className='grid grid-cols-3 justify-between text-sm md:text-base xl:text-lg mt-4'>
                 <span className='flex flex-col gap-1'>
                   <p className='text-[#717579] font-bold'>User</p>
-                  <p className='text-[#3B4043] font-bold text-base md:text-lg lg:text-xl'>{result.user}</p>
+                  <p className='text-[#3B4043] font-bold text-base md:text-lg xl:text-xl overflow-hidden'>{result.user}</p>
                 </span>
                 <span className='flex flex-col gap-1'>
                   <p className='text-[#717579] font-bold'>User ID</p>
-                  <p className='text-[#3B4043] font-bold text-base md:text-lg lg:text-xl'>{result.user_id}</p>
+                  <p className='text-[#3B4043] font-bold text-base md:text-lg xl:text-xl'>{result.user_id}</p>
                 </span>
                 <span className='flex flex-col gap-1'>
                   <p className='text-[#717579] font-bold'>Type</p>
-                  <p className='text-[#3B4043] font-bold text-base md:text-lg lg:text-xl'>{result.type}</p>
+                  <p className='text-[#3B4043] font-bold text-base md:text-lg xl:text-xl'>{result.type}</p>
                 </span>
                 <span className='flex flex-col gap-1'>
                   <p className='text-[#717579] font-bold'>Views</p>
-                  <p className='text-[#3B4043] font-bold text-base md:text-lg lg:text-xl'>{result.views}</p>
+                  <p className='text-[#3B4043] font-bold text-base md:text-lg xl:text-xl'>{result.views}</p>
                 </span>
                 <span className='flex flex-col gap-1'>
                   <p className='text-[#717579] font-bold'>Downloads</p>
-                  <p className='text-[#3B4043] font-bold text-base md:text-lg lg:text-xl'>{result.downloads}</p>
+                  <p className='text-[#3B4043] font-bold text-base md:text-lg xl:text-xl'>{result.downloads}</p>
                 </span>
                 <span className='flex flex-col gap-1'>
                   <p className='text-[#717579] font-bold'>Likes</p>
-                  <p className='text-[#3B4043] font-bold text-base md:text-lg lg:text-xl'>{result.likes}</p>
+                  <p className='text-[#3B4043] font-bold text-base md:text-lg xl:text-xl'>{result.likes}</p>
                 </span>
               </div>
             </div>

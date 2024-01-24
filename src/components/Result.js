@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import { useDispatch } from 'react-redux';
 import { setSearchTerm } from '../redux/searchSlice';
 import FullDetails from './FullDetails';
@@ -9,6 +9,36 @@ const Result = ({ searchResults }) => {
   const [tagSuggestions, setTagSuggestions] = useState([]);
   const [visibleTagIndex, setVisibleTagIndex] = useState(0);
   const [selectedImageId, setSelectedImageId] = useState(null);
+  const [numVisibleTags, setNumVisibleTags] = useState(calculateNumVisibleTags());
+
+  function calculateNumVisibleTags() {
+    const windowWidth = window.innerWidth;
+    if (windowWidth >= 1280) {
+      return 10;
+    } else if (windowWidth >= 1024) {
+      return 7;
+    } else if (windowWidth >= 768) {
+      return 5;
+    } else {
+      return 3;
+    }
+  }
+
+  const handleResize = () => {
+    setNumVisibleTags(calculateNumVisibleTags());
+  };
+
+  useEffect(() => {
+    getTagSuggestions();
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [searchResults]);  
+
+  useEffect(() => {
+    setVisibleTagIndex(0);
+  }, [numVisibleTags]);
 
   const getTagSuggestions = () => {
     if (searchResults.length === 0) {
@@ -19,7 +49,9 @@ const Result = ({ searchResults }) => {
     const tagCount = {};
     searchResults.forEach((result) => {
       result.tags.split(', ').forEach((tag) => {
-        tagCount[tag] = (tagCount[tag] || 0) + 1;
+        if (!tag.includes(' ')) {
+          tagCount[tag] = (tagCount[tag] || 0) + 1;
+        }
       });
     });
 
@@ -30,17 +62,13 @@ const Result = ({ searchResults }) => {
     setTagSuggestions(sortedTags.slice(0, 20));
   };
 
-  useEffect(() => {
-    getTagSuggestions();
-  }, [searchResults]);
-
   const showNextTags = () => {
-    const nextIndex = visibleTagIndex + 10;
-    setVisibleTagIndex(Math.min(nextIndex, tagSuggestions.length - 10));
+    const nextIndex = visibleTagIndex + numVisibleTags;
+    setVisibleTagIndex(Math.min(nextIndex, tagSuggestions.length - numVisibleTags));
   };
 
   const showPreviousTags = () => {
-    const prevIndex = visibleTagIndex - 10;
+    const prevIndex = visibleTagIndex - numVisibleTags;
     setVisibleTagIndex(Math.max(prevIndex, 0));
   };
 
@@ -61,21 +89,27 @@ const Result = ({ searchResults }) => {
   return (
     <div className='w-full bg-white'>
       {/* suggestion */}
-      <div className='bg-neutral-100 p-3 items-center text-[#767676] px-5 lg:px-12 gap-3 hidden lg:flex'>
-        <IoIosArrowBack className='text-3xl font-normal text-neutral-500' onClick={showPreviousTags} />
-        {tagSuggestions.slice(visibleTagIndex, visibleTagIndex + 10).map((tag, index) => (
+      <div className='bg-neutral-100 p-3 items-center justify-center text-[#767676] px-5 lg:px-12 gap-3 flex'>
+        <IoIosArrowBack
+          className='text-3xl font-normal text-neutral-500'
+          onClick={showPreviousTags}
+        />
+        {tagSuggestions.slice(visibleTagIndex, visibleTagIndex + numVisibleTags).map((tag, index) => (
           <span
             key={index}
-            className='border-2 w-32 lg:w-36 rounded-md flex items-center justify-center text-center py-2'
-            onClick={()=>dispatch(setSearchTerm(tag))}
+            className={`border-2 w-32 lg:w-36 rounded-md flex items-center justify-center text-center py-2`}
+            onClick={() => dispatch(setSearchTerm(tag))}
           >
             {tag}
           </span>
         ))}
-        <IoIosArrowForward className='text-3xl font-normal text-neutral-500' onClick={showNextTags} />
+        <IoIosArrowForward
+          className='text-3xl font-normal text-neutral-500'
+          onClick={showNextTags}
+        />
       </div>
       {/* Result */}
-      <div className='px-5 lg:px-12 py-8 lg:py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-x-12 lg:gap-x-20'>
+      <div className='px-5 lg:px-12 py-8 lg:py-12 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 md:gap-x-12 lg:gap-x-20'>
         {searchResults.map((result) => (
           <div key={result.id}>
             <img
@@ -84,12 +118,13 @@ const Result = ({ searchResults }) => {
               alt={result.tags}
               onClick={() => handleImageClick(result.id)}
             />
+            {/* Currently I am talking about these tags */}
             <div className='py-2 flex gap-2 lg:gap-3 lg:py-4 lg:text-lg'>
               {result.tags.split(', ').slice(0, 3).map((tag, index) => (
                 <span
                   key={index}
                   className='bg-neutral-100 text-[#767676] rounded-md p-2'
-                  onClick={()=>dispatch(setSearchTerm(tag))}
+                  onClick={() => dispatch(setSearchTerm(tag))}
                 >
                   {tag}
                 </span>

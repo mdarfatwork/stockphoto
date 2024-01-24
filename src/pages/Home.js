@@ -19,11 +19,13 @@ const Home = () => {
     if (trimmedSearchTerm !== "") {
       try {
         setLoadingResults(true);
-        const apiKey = '41889997-7e8f4b2b33eb278091ad77500';
+        const apiKey = '41999819-ec8be8df58bd1ef7aaccdb665';
         const apiUrl = `https://pixabay.com/api/?key=${apiKey}&q=${trimmedSearchTerm}&image_type=photo&page=${page}`;
 
         const response = await fetch(apiUrl);
         const data = await response.json();
+
+        console.log('API Response:', data);
 
         const updatedResults = page === 1 ? data.hits : [...searchResults, ...data.hits];
 
@@ -70,12 +72,12 @@ const Home = () => {
       <div className={`px-5 lg:px-8 ${showResults ? '' : 'pt-8 lg:pt-14'}`}>
         {/* Title */}
         {!showResults && (
-          <h1 className='text-center text-white text-2xl lg:text-7xl font-black leading-10 lg:leading-tight'>
+          <h1 className='text-center text-white text-2xl md:text-4xl lg:text-6xl xl:text-7xl font-black leading-10 lg:leading-tight'>
             Discover over 2,000,000<br />free Stock Images
           </h1>
         )}
         {/* Search */}
-        <div className={`sticky w-4/5 lg:w-1/2 mx-auto border-2 lg:border-[3px] border-white text-white rounded-md backdrop-filter backdrop-blur-lg border-opacity-40 px-4 py-3 flex justify-between items-center ${showResults ? '' : 'mt-10 lg:mt-20'}`}>
+        <div className={`sticky w-4/5 md:w-3/4 lg:w-3/5 xl:w-1/2 mx-auto border-2 lg:border-[3px] border-white text-white rounded-md backdrop-filter backdrop-blur-lg border-opacity-40 px-4 py-3 flex justify-between items-center ${showResults ? '' : 'mt-8 lg:mt-16 xL:mt-20'}`}>
           <div className='flex items-center gap-2 lg:text-xl w-full'>
             <RiSearch2Line className='text-lg lg:text-2xl' /> |
             <input
@@ -96,7 +98,7 @@ const Home = () => {
         </div>
         {/* Trending */}
         {!showResults && (
-          <div className='mx-auto w-4/6 lg:w-3/12 flex items-center justify-center p-1 lg:p-2 border-2 lg:border-[3px] border-white text-white rounded-md backdrop-filter backdrop-blur-lg border-opacity-40 mt-5 lg:mt-7 text-xs lg:text-base'>
+          <div className='mx-auto w-64 lg:w-96 flex items-center justify-center p-1 lg:p-2 border-2 lg:border-[3px] border-white text-white rounded-md backdrop-filter backdrop-blur-lg border-opacity-40 mt-5 lg:mt-7 text-xs lg:text-base'>
             <span className='font-semibold'>Trending:</span>&nbsp;
             {['flowers', 'love', 'forest', 'river'].map((trend, index) => (
               <span
@@ -112,7 +114,7 @@ const Home = () => {
         )}
         {/* Results */}
         {showResults && (
-          <p className='mt-8 text-xl font-black text-white text-center lg:text-5xl'>
+          <p className='my-6 md:my-8 lg:my-10 text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-extrabold lg:font-black text-white text-center'>
             Results: {searchTerm}
           </p>
         )}
