@@ -39,9 +39,7 @@ LibreLens is built using the following technologies:
 - Axios
 - nanoid
 - react-icons
-- react-redux
 - react-router-dom
-- redux
 
 
 ## Contact
