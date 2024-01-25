@@ -7,14 +7,12 @@ import { createBrowserRouter, Outlet, RouterProvider, ScrollRestoration} from "r
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 
-
 const Layout = () =>{
   return(
     <div>
       <Navbar/>
       <ScrollRestoration/>
       <Outlet/>
-      {/* <Footer/> */}
     </div>
   )
 };
@@ -50,14 +48,16 @@ function App() {
           `https://pixabay.com/api/?key=${apiKey}&q=mountain%20night&image_type=photo`
         );
 
-        const randomImage =
-          response.data.hits[
-            Math.floor(Math.random() * response.data.hits.length)
-          ];
+        const { hits } = response.data;
 
-        setBackgroundImage(randomImage.largeImageURL);
+        if (hits && hits.length > 0) {
+          const randomImage = hits[Math.floor(Math.random() * hits.length)];
+          setBackgroundImage(randomImage.largeImageURL);
+        } else {
+          console.error('No hits found in the Pixabay API response.');
+        }
       } catch (error) {
-        console.error('Error fetching background image:', error);
+        console.error('Error fetching background image:', error.message);
       }
     };
 

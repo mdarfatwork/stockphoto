@@ -3,6 +3,7 @@ import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import { useDispatch } from 'react-redux';
 import { setSearchTerm } from '../redux/searchSlice';
 import FullDetails from './FullDetails';
+import { nanoid } from 'nanoid';
 
 const Result = ({ searchResults }) => {
   const dispatch = useDispatch();
@@ -96,7 +97,7 @@ const Result = ({ searchResults }) => {
         />
         {tagSuggestions.slice(visibleTagIndex, visibleTagIndex + numVisibleTags).map((tag, index) => (
           <span
-          key={`${tag}-${index}`}
+            key={nanoid()}
             className={`border-2 w-32 lg:w-36 rounded-md flex items-center justify-center text-center py-2`}
             onClick={() => dispatch(setSearchTerm(tag))}
           >
@@ -121,7 +122,7 @@ const Result = ({ searchResults }) => {
             <div className='py-2 flex gap-2 lg:gap-3 lg:py-4 lg:text-lg mb-2'>
               {result.tags.split(', ').slice(0, 3).map((tag, index) => (
                 <span
-                  key={`${result.id}-${tag}-${index}`}
+                  key={nanoid()}
                   className='bg-neutral-100 text-[#767676] rounded-md p-2'
                   onClick={() => dispatch(setSearchTerm(tag))}
                 >

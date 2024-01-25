@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const searchSlice = createSlice({
   name: 'search',
   initialState: {
-    searchTerm: "",
+    searchTerm: '',
     searchResults: [],
     page: 1,
   },

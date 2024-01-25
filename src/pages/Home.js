@@ -19,8 +19,8 @@ const Home = () => {
     if (trimmedSearchTerm !== "") {
       try {
         setLoadingResults(true);
-        const apiKey = '41999819-ec8be8df58bd1ef7aaccdb665';
-        const apiUrl = `https://pixabay.com/api/?key=${apiKey}&q=${trimmedSearchTerm}&image_type=photo&page=${page}`;
+        const apiKey = '42020234-fba3cc34ce6c522f7bb6a73b0';
+        const apiUrl = `https://pixabay.com/api/?key=${apiKey}&q=${trimmedSearchTerm}&image_type=photo&page=${page}&safesearch=true`;
 
         const response = await fetch(apiUrl);
         const data = await response.json();
