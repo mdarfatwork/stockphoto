@@ -46,7 +46,7 @@ LibreLens is built using the following technologies:
 
 For any questions or feedback, feel free to reach out:
 
-- GitHub: [mdarfatwork/LibreLens](https://github.com/mdarfatwork)
+- GitHub: [mdarfatwork](https://github.com/mdarfatwork)
 - LinkedIn: [Momin Mohammed Arfat](https://www.linkedin.com/in/momin-mohammed-arfat/)
 
 ## License
