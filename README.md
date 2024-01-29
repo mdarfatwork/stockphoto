@@ -22,7 +22,7 @@ Explore LibreLens [here](https://arfatstockphoto.web.app/) or check out the scre
 
 ## Video
 
-[![Demo Video](https://i.ibb.co/F4zLHJr/image.png)]([http://www.youtube.com/watch?v=YOUR_VIDEO_ID](https://jumpshare.com/embed/netidcDmNVlKMP0ZkqkI))
+[Video](https://jumpshare.com/embed/netidcDmNVlKMP0ZkqkI)
 
 ## Installation
 
