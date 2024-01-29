@@ -22,7 +22,7 @@ Explore LibreLens [here](https://arfatstockphoto.web.app/) or check out the scre
 
 ## Video
 
-[![Stock Photo Application Demo](https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg)](https://github.com/mdarfatwork/stockphoto/blob/main/asset/Stock%20Photo%20Application.mp4)
+[![Demo Video](https://raw.githubusercontent.com/mdarfatwork/stockphoto/main/asset/Stock%20Photo%20Application.mp4)](https://raw.githubusercontent.com/mdarfatwork/stockphoto/main/asset/Stock%20Photo%20Application.mp4)
 
 ## Installation
 
