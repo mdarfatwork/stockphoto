@@ -20,10 +20,6 @@ Explore LibreLens [here](https://arfatstockphoto.web.app/) or check out the scre
 ![Screenshot 4](https://i.ibb.co/8PFVDsj/image.png)
 ![Screenshot 5](https://i.ibb.co/drgzJr9/image.png)
 
-## Video
-
-[![Demo Video](https://raw.githubusercontent.com/mdarfatwork/stockphoto/main/asset/Stock%20Photo%20Application.mp4)](https://raw.githubusercontent.com/mdarfatwork/stockphoto/main/asset/Stock%20Photo%20Application.mp4)
-
 ## Installation
 
 To install LibreLens, follow these steps:
